@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %} Movie Recommender {% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="../static/style.css"}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d4e0abf92b.js" crossorigin="anonymous"></script>
+{% endblock %}
+{% block body %}
+    <div class="wrapper">
+        <div class="container">
+             <form action='/' method="post">
+            <h1 class="form-title">What movie have you seen?</h1>
+            <div class="input-wrap">
+                <input type="text" class="input_movie" name="input_movie" autofocus minlength="1" placeholder="Search for a movie..."/>
+                <button type="submit" class="input-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            </form>
+            {% if given_film %} <h1 class="active-title">Select a movie:</h1> {% endif %}
+            <ul>
+            {% for title in movies %}
+                <li><button class="film" id="{{ title[1] }}">{{ title[1] }}</button></li>
+            {% endfor %}
+            </ul>
+            {% if found_movies %} <h1 class="recommended-title">You might also like:</h1> {% endif %}
+            <div class="recommendations">
+                {% for movie in found_movies %}
+                    <p class="recommended-movie">{{ movie }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <footer>
+            <a class="inst-link" href="https://www.instagram.com/r.ponepolyak/" target=”_blank”>Roman Ponepoliak</a>
+            <a class="inst-link" href="https://www.instagram.com/ovchi_vanya/" target=”_blank”>Ivan Ovchynnikov</a>
+            <a class="inst-link" href="https://www.instagram.com/ivan._.ppv/" target=”_blank”>Ivan Popovych</a>
+        </footer>
+    </div>
+    <script src="../static/script.js"></script>
+{% endblock %}

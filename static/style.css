@@ -1,0 +1,133 @@
+html,body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F0F0F0;
+    box-sizing: border-box;
+    margin: 0;
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 1 auto;
+}
+
+.form-title {
+    text-align: center;
+}
+
+.input-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+input {
+    width: 200px;
+    height: 22px;
+    border-radius: 12px 0 0 12px;
+    border: none;
+    padding: 10px 16px;
+}
+
+.input-btn {
+    border: none;
+    border-radius: 0 12px 12px 0;
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.input-btn:hover {
+    transition: 0.3s;
+    background-color: #4c9cff;
+    color: white;
+}
+
+.input-btn i {
+    font-size: 18px;
+    margin-right: 8px;
+    padding-left: 5px;
+}
+
+.active-title {
+    font-size: 26px;
+    text-align: center;
+    margin-top: 32px;
+}
+
+ul{
+    padding: 0;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    gap: 16px;
+    justify-content: center;
+}
+
+.film {
+    width: 287px;
+    height: 42px;
+    border: solid 1px #d0d0d0;
+    border-radius: 12px;
+    background-color: white;
+    font-weight: bold;
+    box-shadow: 0 0 24px -10px rgba(0,0,0,0.66);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.film:hover {
+    border: none;
+    transition: 0.3s;
+    background-color: #007BFF;
+    color: white;
+}
+
+.recommended-title {
+    font-size: 26px;
+    text-align: center;
+    margin-top: 32px;
+}
+
+.recommendations {
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    gap: 0 16px;
+    justify-content: center;
+}
+
+.recommended-movie {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 287px;
+    height: 42px;
+    border: solid 1px #d0d0d0;
+    border-radius: 12px;
+    background-color: white;
+    font-weight: bold;
+    box-shadow: 0 0 24px -10px rgba(0,0,0,0.66);
+}
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: black;
+    height: 60px;
+}
+
+.inst-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
