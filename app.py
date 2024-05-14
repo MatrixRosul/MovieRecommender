@@ -28,7 +28,8 @@ def main_page():  # put application's code here
         session.pop("given_film", "")
         session["given_film"] = request.form.get('input_movie')
         if session["given_film"]:
-            session["matches"] = Searcher().search_words(session["given_film"], list(sparql_request.movies.keys()),
+            session["matches"] = Searcher().search_words(session["given_film"],
+                                                         list(sparql_request.movies_overview.keys()),
                                                          max_operations=5)
             return redirect('/')
         else:
@@ -45,7 +46,7 @@ def film_select(film):
     if request.method == "POST":
         # print(film)
         session["found_movies"] = nlp_search_movies.search_movie(
-            film, sparql_request.movies)
+            film, sparql_request.movies_overview, sparql_request.movies_genres)
     return redirect('/')
 
 
