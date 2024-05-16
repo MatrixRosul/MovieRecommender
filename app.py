@@ -46,7 +46,7 @@ def film_select(film):
     if request.method == "POST":
         # print(film)
         session["found_movies"] = nlp_search_movies.search_movie(
-            film, sparql_request.movies_overview, sparql_request.movies_genres)
+            film, sparql_request.movies_overview, sparql_request.movies_genres, sparql_request.movies_companies, sparql_request.movies_keywords)
     return redirect('/')
 
 
