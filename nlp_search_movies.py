@@ -33,9 +33,15 @@ def search_movie(movie_selected, dict_movies_overview, dict_movies_genres, dict_
     mx_sim_keywords = 0
     cnt_sim_companies = 0
     answer_movies = []
-    len_genres = len(dict_movies_genres[movie_selected])
-    len_companies = len(dict_movies_companies[movie_selected])
-    len_keywords = len(dict_movies_keywords[movie_selected])
+    # Перевірка наявності ключа та отримання його довжини
+    len_genres = len(dict_movies_genres.get(movie_selected, []))
+    len_companies = len(dict_movies_companies.get(movie_selected, []))
+    len_keywords = len(dict_movies_keywords.get(movie_selected, []))
+
+    # Якщо ключ відсутній, len_genres, len_companies та len_keywords буде 1, щоб не було помилки при діленні на 0
+    len_genres = 1 if len_genres == 0 else len_genres
+    len_companies = 1 if len_companies == 0 else len_companies
+    len_keywords = 1 if len_keywords == 0 else len_keywords
 
     for movie in data_movies.keys():
         if movie != movie_selected:
@@ -46,25 +52,31 @@ def search_movie(movie_selected, dict_movies_overview, dict_movies_genres, dict_
             cnt_sim_genres = 0
             cnt_sim_companies = 0
             cnt_sim_keywords = 0
-            if movie in dict_movies_genres:
-                list_genres = dict_movies_genres[movie]
-                for genre in list_genres:
-                    if genre in dict_movies_genres[movie_selected]: cnt_sim_genres += 1
 
-            if movie in dict_movies_companies:
-                list_companies = dict_movies_companies[movie]
-                for company in list_companies:
-                    if company in dict_movies_companies[movie_selected]: cnt_sim_companies += 1
+            # Отримання значень за ключами з можливістю встановлення значення за замовчуванням []
+            list_genres = dict_movies_genres.get(movie, [])
+            list_companies = dict_movies_companies.get(movie, [])
+            list_keywords = dict_movies_keywords.get(movie, [])
 
-            if movie in dict_movies_keywords:
-                list_keywords = dict_movies_keywords[movie]
-                for keyword in list_keywords:
-                    if keyword in dict_movies_keywords[movie_selected]: cnt_sim_keywords += 1
+            for genre in list_genres:
+                if genre in dict_movies_genres.get(movie_selected, []):
+                    cnt_sim_genres += 1
 
-            answer_movies.append(((cnt_sim_genres / len_genres + cnt_sim_companies / len_companies + cnt_sim_keywords / len_keywords + (3-euc_dist)),movie))
+            for company in list_companies:
+                if company in dict_movies_companies.get(movie_selected, []):
+                    cnt_sim_companies += 1
+
+            for keyword in list_keywords:
+                if keyword in dict_movies_keywords.get(movie_selected, []):
+                    cnt_sim_keywords += 1
+
+            answer_movies.append(((
+                                              cnt_sim_genres / len_genres + cnt_sim_companies / len_companies + cnt_sim_keywords / len_keywords + (
+                                                  3 - euc_dist)), movie))
             mx_sim_genres = max(mx_sim_genres, cnt_sim_genres)
             mx_sim_companies = max(mx_sim_companies, cnt_sim_companies)
             mx_sim_keywords = max(mx_sim_keywords, cnt_sim_keywords)
+
 
     answer_movies.sort(reverse=True)
 
